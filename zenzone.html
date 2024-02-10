@@ -1,69 +1,82 @@
 <html>
-    <head>
-        <title>
-            Welcome to zenzone
-        </title>
-    </head>
-    <style>
-        body{
-            display: grid;
-            justify-content: center;
-            align-items: center;
-            background-color: palevioletred;
-          
-            
-        }
-        .zenzone_heading
-        {
-display: grid;
-justify-content: center;
-        }
-        .login_inputs
-        {
-display: grid;
-justify-content: center;
-gap:10px;
-        }
-        .button1
-        {
-display: grid;
-justify-content: center;
-margin-top: 10px;
-        }
-        .innerbox
-        {
-                height: 40px;
-                width: 200px;
-               
-                border-radius: 30px;
-        }
-        .login_button
-        {
-           
-            border-radius: 20px;
-            
-        }
-        .zenzone_content
-        {
-            color:yellow;
-            font-style: italic;
-            font-weight: 999;
-            
-        }
-        
+
+<head>
+    <title>
+        Welcome to zenzone
+    </title>
+</head>
+<style>
+    body {
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        background-color: palevioletred;
 
 
+    }
 
+    .zenzone_heading {
+        display: grid;
+        justify-content: center;
+    }
 
-    </style>
+    .login_inputs {
+        display: grid;
+        justify-content: center;
+        gap: 10px;
+    }
 
-    <body>
-        <div class="entire_page">
-        <div class="zenzone_heading"><h2 class="zenzone_content">Zenzone</h2></div>
-        
+    .button1 {
+        display: grid;
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .innerbox {
+        height: 40px;
+        width: 200px;
+
+        border-radius: 30px;
+    }
+
+    .login_button {
+
+        border-radius: 20px;
+
+    }
+
+    .zenzone_content {
+
+        color: yellow;
+        font-style: italic;
+        font-weight: 999;
+        font-size: xx-large;
+        text-shadow: -2px -2px 0 red, 2px -2px 0 red, -2px 2px 0 red, 2px 2px 0 red;
+
+    }
+    .create
+    {
+        margin-top: 10px;
+    }
+</style>
+
+<body>
+    <div class="entire_page">
+        <div class="zenzone_heading">
+            <h1 class="zenzone_content">Zenzone</h1>
+        </div>
+
         <div class="login_inputs">
-            <input class="innerbox" type="text" placeholder="&nbsp;&nbsp;Username">
-        <input  class="innerbox" type="text" placeholder="&nbsp;&nbsp;Password"></div>
-        <div class="button1"><button class="login_button">Login</button></div></div>
-    </body>
+            <input class="innerbox" type="text" placeholder="&nbsp;Username">
+            <input class="innerbox" type="text" placeholder="&nbsp;Password">
+        </div>
+        
+            <div class="button1"><button class="login_button">Login</button>
+
+
+                <a class="create" href="">Create Account</a></div></div>
+
+          
+</body>
+
 </html>
