@@ -1,64 +1,59 @@
 const express = require('express');
 const mysql = require('mysql2');
 const bodyParser = require('body-parser');
-const bcrypt = require('bcrypt');
+const path = require('path');
 
 const app = express();
-const port = 3000;
 
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'dhanush',
-    password: 'priya0818',
-    database: 'zenzone'
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'dhanush',
+  password: 'priya0818',
+  database: 'zenz12345',
 });
 
-db.connect((err) => {
+connection.connect((err) => {
+  if (err) {
+    console.error('Error connecting to MySQL: ', err); 
+    return;
+  }
+  console.log('Connected to MySQL');
+});
+
+// Serve static files from the root directory
+app.use(express.static(path.join(__dirname)));
+
+// Handle GET request for the root path
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'Create_Account.html'));
+});
+
+// Express route for handling the form submission (POST request)
+app.post('/submit', (req, res) => {
+    const name = req.body.name;
+
+  const username = req.body.username;
+  const password = req.body.password;
+  const age = req.body.age;
+
+  // Insert the data into the MySQL table
+  const sql = 'INSERT INTO zenztable (name, username, password,age) VALUES (?, ?,?,?)';
+  connection.query(sql, [name,username, password,age], (err, result) => {
     if (err) {
-        console.error('Error connecting to MySQL database: ', err);
-        throw err;
+      console.error('Error storing data in MySQL: ', err);
+      res.status(500).send('Error storing data in MySQL');
+      return;
     }
-    console.log('Connected to MySQL database');
+
+    console.log('Data stored successfully in MySQL');
+    res.status(200).send('Data stored successfully in MySQL');
+  });
 });
 
-// Register a new user (POST request)
-app.post('/register', async (req, res) => {
-    try {
-        const fullName = req.body.fullName;
-        const username = req.body.username;
-        const password = await bcrypt.hash(req.body.password, 10); // Hash the password
-        const age = req.body.age;
-
-        const sql = 'INSERT INTO zen1 (full_name, username, password, age) VALUES (?, ?, ?, ?)';
-        const values = [fullName, username, password, age];
-
-        db.query(sql, values, (err, result) => {
-            if (err) {
-                console.error('Error executing MySQL query: ', err);
-                res.status(500).json({ error: 'Internal Server Error' });
-                return;
-            }
-            console.log('User registered successfully');
-            res.status(200).json({ message: 'User registered successfully' });
-        });
-    } catch (error) {
-        console.error('Error processing registration request: ', error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-});
-
-// Get user details by ID (GET request)
-app.get('/zenzone.html', (req, res) => {
-    const userId = req.params.id;
-
-    // Perform a database query or other logic based on the user ID
-    // For simplicity, let's just return a message with the user ID
-    res.status(200).json({ userId, message: 'User details fetched successfully' });
-});
-
+const port = 3000;
 app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+  console.log(`Server is running on port ${port}`);
 });
