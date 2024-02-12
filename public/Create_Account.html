@@ -57,6 +57,7 @@
     </div>
     <form action="/submit" method="post" onsubmit="return validateForm()">
         <div class="Entire_page">
+            
             <input class="inputs" type="text" placeholder="Enter your full name" name="name" id="name">
             <span class="error-message" id="name-error"></span>
 
@@ -71,7 +72,7 @@
         </div>
         <div class="buttons">
             <button class="inner1" type="submit">Register</button>
-            <button class="inner2" onclick="Loginpage()">Go To Login Page</button>
+            <button class="inner2" type="button" onclick="Loginpage()">Go To Login Page</button>
         </div>
     </form>
 
@@ -90,10 +91,10 @@
 
             // Validate name (less than 15 characters)
             var nameRegex = /^[a-zA-Z]{5,15}$/;
-        if (!nameRegex.test(name)) {
-            document.getElementById("name-error").innerText = "Name should be between 5 and 15 characters and contain only letters.";
-            return false;
-        }
+            if (!nameRegex.test(name)) {
+                document.getElementById("name-error").innerText = "Name should be between 5 and 15 characters and contain only letters.";
+                return false;
+            }
 
             // Validate username (less than 15 characters)
             if (username === "" || username.length > 15) {
