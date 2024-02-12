@@ -1,9 +1,7 @@
 <html>
 
 <head>
-    <title>
-        Welcome to zenzone
-    </title>
+    <title>Welcome to zenzone</title>
 </head>
 <style>
     body {
@@ -11,8 +9,6 @@
         justify-content: center;
         align-items: center;
         background-color: palevioletred;
-
-
     }
 
     .zenzone_heading {
@@ -35,27 +31,22 @@
     .innerbox {
         height: 40px;
         width: 200px;
-
         border-radius: 30px;
     }
 
     .login_button {
-
         border-radius: 20px;
-
     }
 
     .zenzone_content {
-
         color: yellow;
         font-style: italic;
         font-weight: 999;
         font-size: xx-large;
         text-shadow: -2px -2px 0 red, 2px -2px 0 red, -2px 2px 0 red, 2px 2px 0 red;
-
     }
-    .create
-    {
+
+    .create {
         margin-top: 10px;
     }
 </style>
@@ -67,16 +58,44 @@
         </div>
 
         <div class="login_inputs">
-            <input class="innerbox" type="text" placeholder="&nbsp;Username">
-            <input class="innerbox" type="text" placeholder="&nbsp;Password">
+            <input id="loginUsername" class="innerbox" type="text" placeholder="&nbsp;Username">
+            <input id="loginPassword" class="innerbox" type="password" placeholder="&nbsp;Password">
         </div>
-        
-            <div class="button1"><button class="login_button">Login</button>
 
+        <div class="button1">
+            <button class="login_button" onclick="attemptLogin()">Login</button>
+            <a class="create" href="/Create_Account.html">Create Account</a>
+        </div>
+    </div>
 
-                <a class="create" href="/Create_Account.html">Create Account</a></div></div>
+    <script>
+        function attemptLogin() {
+            var username = document.getElementById("loginUsername").value;
+            var password = document.getElementById("loginPassword").value;
 
-          
+            // Make an AJAX request to the server for login validation
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/login", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        // If the server responds with success, show alert and redirect
+                        alert("Login successful!");
+                        window.location.href = "/zenzone.html";
+                    } else {
+                        // If the server responds with failure, show alert
+                        alert("Invalid username or password. Please try again.");
+                    }
+                }
+            };
+
+            // Send the request with username and password as JSON
+            xhr.send(JSON.stringify({ username: username, password: password }));
+        }
+    </script>
+
 </body>
 
 </html>
