@@ -24,11 +24,11 @@ connection.connect((err) => {
 });
 
 // Serve static files from the root directory
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Handle GET request for the root path
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'Create_Account.html'));
+  res.sendFile(path.join(__dirname, 'public', 'zenzone.html'));
 });
 
 // Express route for handling the form submission (POST request)

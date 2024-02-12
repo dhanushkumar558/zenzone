@@ -32,7 +32,7 @@
             }
             .buttons
             {
-                display: grid;
+                display: flex;
                 justify-content: center;
                 align-items: center;
                 gap: 20px;
@@ -41,12 +41,20 @@
             }
             .inner1
             {
+                margin-top: -30px;
+                display: inline-block;
+                border-radius: 20px;
+            }
+            .inner2
+            {   margin-top: -30px;
+                display: inline-block;
                 border-radius: 20px;
             }
            
+           
             
             
-
+      
     </style>
     <body>
         
@@ -57,12 +65,12 @@
         <input class="inputs" type="text" placeholder="Enter your full name" name="name">
         <input class="inputs" type="text" placeholder="Create username" name="username">
         <input class="inputs" type="text" placeholder="Create new password"name="password">
-        <input  class="inputs" type="number" placeholder="Enter your age"name="age">
+        <input  class="inputs" type="number" placeholder="Enter your age"name="age"></form>
         
  </div>
- <div class="buttons">
- <button class="inner1" type="submit">Register</button></form>
- <button class="inner1" onclick="Loginpage()">Go To Login Page</button></a>
+ <div class="buttons"></div>
+ <button class="inner1" type="submit">Register</button>
+ <button class="inner2" onclick="Loginpage()">Go To Login Page</button>
  <script>
     function Loginpage()
     {
