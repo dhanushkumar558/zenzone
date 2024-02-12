@@ -1,89 +1,125 @@
 <html>
-    <head>
-        <title>Account Creation Centre</title>
-    </head>
-    <style>
-        body{
-            display: grid;
-            justify-content: center;
-            align-items: center;
-            background-color: aqua;
-        }
-        .Entire_page
-        {
-            gap: 30px;
-            display: grid;
-            justify-content: center;
-            align-items: center;
-        }
-        .inputs
-        {
-            height: 50px;
-            width: 250px;
-        }
-        .account_creation
-        {
-            display: grid;
-            justify-content: center;
-            align-items: center;
-            color: red;
-            font-style: italic;
-            font-size: xx-large;
-            }
-            .buttons
-            {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                gap: 20px;
-                margin-top: 40px;
-               
-            }
-            .inner1
-            {
-                margin-top: -30px;
-                display: inline-block;
-                border-radius: 20px;
-            }
-            .inner2
-            {   margin-top: -30px;
-                display: inline-block;
-                border-radius: 20px;
-            }
-           
-           
-            
-            
-      
-    </style>
-    <body>
-        
-       
-           <div> <h2 class="account_creation">Account Creation</h2></div>
-           <form action="/submit" method="post">
-            <div class="Entire_page">
-        <input class="inputs" type="text" placeholder="Enter your full name" name="name">
-        <input class="inputs" type="text" placeholder="Create username" name="username">
-        <input class="inputs" type="text" placeholder="Create new password"name="password">
-        <input  class="inputs" type="number" placeholder="Enter your age"name="age"></form>
-        
- </div>
- <div class="buttons"></div>
- <button class="inner1" type="submit">Register</button>
- <button class="inner2" onclick="Loginpage()">Go To Login Page</button>
- <script>
-    function Loginpage()
-    {
-        window.location.href="/zenzone.html";
+<head>
+    <title>Account Creation Centre</title>
+</head>
+<style>
+    body {
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        background-color: aqua;
     }
 
+    .Entire_page {
+        gap: 30px;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+    }
 
- </script>
-</div>
+    .inputs {
+        height: 50px;
+        width: 250px;
+    }
 
+    .account_creation {
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        color: red;
+        font-style: italic;
+        font-size: xx-large;
+    }
 
+    .buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        margin-top: 40px;
+    }
 
-        
-        
-    </body>
+    .inner1,
+    .inner2 {
+        margin-top: -30px;
+        display: inline-block;
+        border-radius: 20px;
+    }
+
+    .error-message {
+        color: red;
+        font-size: small;
+    }
+</style>
+<body>
+    <div>
+        <h2 class="account_creation">Account Creation</h2>
+    </div>
+    <form action="/submit" method="post" onsubmit="return validateForm()">
+        <div class="Entire_page">
+            <input class="inputs" type="text" placeholder="Enter your full name" name="name" id="name">
+            <span class="error-message" id="name-error"></span>
+
+            <input class="inputs" type="text" placeholder="Create username" name="username" id="username">
+            <span class="error-message" id="username-error"></span>
+
+            <input class="inputs" type="text" placeholder="Create new password" name="password" id="password">
+            <span class="error-message" id="password-error"></span>
+
+            <input class="inputs" type="number" placeholder="Enter your age" name="age" id="age">
+            <span class="error-message" id="age-error"></span>
+        </div>
+        <div class="buttons">
+            <button class="inner1" type="submit">Register</button>
+            <button class="inner2" onclick="Loginpage()">Go To Login Page</button>
+        </div>
+    </form>
+
+    <script>
+        function validateForm() {
+            var name = document.getElementById("name").value;
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            var age = document.getElementById("age").value;
+
+            // Reset error messages
+            document.getElementById("name-error").innerText = "";
+            document.getElementById("username-error").innerText = "";
+            document.getElementById("password-error").innerText = "";
+            document.getElementById("age-error").innerText = "";
+
+            // Validate name (less than 15 characters)
+            var nameRegex = /^[a-zA-Z]{5,15}$/;
+        if (!nameRegex.test(name)) {
+            document.getElementById("name-error").innerText = "Name should be between 5 and 15 characters and contain only letters.";
+            return false;
+        }
+
+            // Validate username (less than 15 characters)
+            if (username === "" || username.length > 15) {
+                document.getElementById("username-error").innerText = "Username should be non-empty and less than 15 characters.";
+                return false;
+            }
+
+            // Validate password (8 to 20 characters with at least one special character and one digit)
+            var passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/;
+            if (!passwordRegex.test(password)) {
+                document.getElementById("password-error").innerText = "Password should be 8 to 20 characters with at least one special character and one digit.";
+                return false;
+            }
+
+            // Validate age (between 18 and 60)
+            if (age === "" || age < 18 || age > 60) {
+                document.getElementById("age-error").innerText = "Age should be between 18 and 60.";
+                return false;
+            }
+
+            return true;
+        }
+
+        function Loginpage() {
+            window.location.href = "/zenzone.html";
+        }
+    </script>
+</body>
 </html>
